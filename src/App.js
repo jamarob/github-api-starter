@@ -1,6 +1,8 @@
 import './App.css'
 import { useEffect, useState } from 'react'
 import { getLoggedInUser } from './service/github-api'
+import Header from './components/Header'
+import HomePage from './pages/HomePage'
 
 function App() {
   const [profile, setProfile] = useState()
@@ -17,10 +19,10 @@ function App() {
   }
 
   return (
-    <div className="App">
-      {profile && <img src={profile.avatar_url} alt={profile.login} />}
-      {error && <img src={`https://http.cat/${error}`} alt={error} />}
-    </div>
+    <section className="App">
+      <Header error={error} profile={profile} />
+      <HomePage />
+    </section>
   )
 }
 

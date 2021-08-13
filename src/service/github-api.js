@@ -9,3 +9,8 @@ const instance = axios.create({
 
 export const getLoggedInUser = () =>
   instance.get('https://api.github.com/user').then(response => response.data)
+
+export const getUserByName = userName =>
+  instance
+    .get(`https://api.github.com/users/${userName}`)
+    .then(response => response.data)
