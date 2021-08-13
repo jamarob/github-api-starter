@@ -2,7 +2,7 @@ export default function PullsList({ pulls }) {
   return (
     <ul>
       {pulls.map(pull => (
-        <li></li>
+        <li>{pull.title}</li>
       ))}
     </ul>
   )
