@@ -14,3 +14,8 @@ export const getUserByName = userName =>
   instance
     .get(`https://api.github.com/users/${userName}`)
     .then(response => response.data)
+
+export const getRepoByUser = userName =>
+  instance
+    .get(`https://api.github.com/users/${userName}/repos`)
+    .then(response => response.data)

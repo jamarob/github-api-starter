@@ -12,7 +12,6 @@ export default function HomePage() {
     getUserByName(userName)
       .then(fetchedUser => {
         setUser(fetchedUser)
-        console.log(user)
       })
       .catch(error => setError(error.response.status))
 
