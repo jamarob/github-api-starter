@@ -33,7 +33,11 @@ export default function HomePage() {
         />
         <button type="submit">search</button>
       </form>
-      {user && <Link to={`/${user.login}/repo`}>Show repo</Link>}
+      {user && (
+        <Link to={`/${user.login}/repo`}>
+          {user.name} has {user.public_repos} repos
+        </Link>
+      )}
     </section>
   )
 }
