@@ -3,6 +3,9 @@ import { useEffect, useState } from 'react'
 import { getLoggedInUser } from './service/github-api'
 import Header from './components/Header'
 import HomePage from './pages/HomePage'
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
+import RepoPage from './pages/RepoPage'
+import PullsPage from './pages/PullsPage'
 
 function App() {
   const [profile, setProfile] = useState()
@@ -21,7 +24,19 @@ function App() {
   return (
     <section className="App">
       <Header error={error} profile={profile} />
-      <HomePage />
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <HomePage />
+          </Route>
+          <Route path="/:userName/repo">
+            <RepoPage />
+          </Route>
+          <Route path="/:userName/:repoName">
+            <PullsPage />
+          </Route>
+        </Switch>
+      </Router>
     </section>
   )
 }

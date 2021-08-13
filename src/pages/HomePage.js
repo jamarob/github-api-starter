@@ -1,18 +1,19 @@
 import { useState } from 'react'
 import { getUserByName } from '../service/github-api'
+import { Link } from 'react-router-dom'
 
 export default function HomePage() {
   const [userName, setUserName] = useState('')
   const [user, setUser] = useState()
+  const [error, setError] = useState()
 
   const handleSubmit = event => {
     event.preventDefault()
     getUserByName(userName)
       .then(fetchedUser => {
         setUser(fetchedUser)
-        console.log(user)
       })
-      .catch(err => console.error(err))
+      .catch(error => setError(error.response.status))
 
     console.log('submit event')
   }
@@ -23,6 +24,7 @@ export default function HomePage() {
         {user && (
           <img src={user.avatar_url} alt="profile picture of github user" />
         )}
+        {error && <img src={`https://http.cat/${error}`} alt={error} />}
       </section>
       <form action="" onSubmit={handleSubmit}>
         <input
@@ -33,6 +35,7 @@ export default function HomePage() {
         />
         <button type="submit">search</button>
       </form>
+      {user && <Link to={`/${user.login}/repo`}>Show repo</Link>}
     </section>
   )
 }
