@@ -5,6 +5,7 @@ import Header from './components/Header'
 import HomePage from './pages/HomePage'
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 import RepoPage from './pages/RepoPage'
+import PullsPage from './pages/PullsPage'
 
 function App() {
   const [profile, setProfile] = useState()
@@ -30,6 +31,9 @@ function App() {
           </Route>
           <Route path="/:userName/repo">
             <RepoPage />
+          </Route>
+          <Route path="/:userName/:repoName">
+            <PullsPage />
           </Route>
         </Switch>
       </Router>

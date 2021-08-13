@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { getRepoByUser } from '../service/github-api'
+import RepoList from '../components/RepoList'
 
 export default function RepoPage() {
   const { userName } = useParams()
@@ -15,7 +16,7 @@ export default function RepoPage() {
 
   return (
     <div>
-      {repos.length === 0 ? <p>no repos found</p> : <p>{repos[0].name}</p>}
+      {repos.length === 0 ? <p>no repos found</p> : <RepoList repos={repos} />}
     </div>
   )
 }
