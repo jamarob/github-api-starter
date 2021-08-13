@@ -23,8 +23,8 @@ function App() {
 
   return (
     <section className="App">
-      <Header error={error} profile={profile} />
       <Router>
+        <Header error={error} profile={profile} />
         <Switch>
           <Route exact path="/">
             <HomePage />
