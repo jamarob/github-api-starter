@@ -14,8 +14,6 @@ export default function HomePage() {
         setUser(fetchedUser)
       })
       .catch(error => setError(error.response.status))
-
-    console.log('submit event')
   }
 
   return (
