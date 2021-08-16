@@ -1,25 +1,44 @@
-import './App.css';
-import {useEffect, useState} from "react";
-import {getLoggedInUser} from "./service/github-api";
+import './App.css'
+import { useEffect, useState } from 'react'
+import { getLoggedInUser } from './service/github-api'
+import Header from './components/Header'
+import HomePage from './pages/HomePage'
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
+import RepoPage from './pages/RepoPage'
+import PullsPage from './pages/PullsPage'
 
 function App() {
-  const [profile,setProfile] = useState()
-  const [error,setError] = useState()
+  const [profile, setProfile] = useState()
+  const [error, setError] = useState()
 
   useEffect(() => {
-    getLoggedInUser().then(setProfile).catch(error => setError(error.response.status))
-  },[])
+    getLoggedInUser()
+      .then(setProfile)
+      .catch(error => setError(error.response.status))
+  }, [])
 
-  if(!profile && !error){
+  if (!profile && !error) {
     return <p>loading</p>
   }
 
   return (
-    <div className="App">
-      {profile && <img src={profile.avatar_url} alt={profile.login}/>}
-      {error && <img src={`https://http.cat/${error}`} alt={error} />}
-    </div>
-  );
+    <section className="App">
+      <Router>
+        <Header error={error} profile={profile} />
+        <Switch>
+          <Route exact path="/">
+            <HomePage />
+          </Route>
+          <Route path="/:userName/repo">
+            <RepoPage />
+          </Route>
+          <Route path="/:userName/:repoName">
+            <PullsPage />
+          </Route>
+        </Switch>
+      </Router>
+    </section>
+  )
 }
 
-export default App;
+export default App
