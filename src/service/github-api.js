@@ -19,3 +19,8 @@ export const getRepos = username =>
   instance
     .get(`https://api.github.com/users/${username}/repos`)
     .then(response => response.data)
+
+export const getPulls = (username, reponame) =>
+  instance
+    .get(`https://api.github.com/repos/${username}/${reponame}/pulls`)
+    .then(response => response.data)
