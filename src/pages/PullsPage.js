@@ -13,11 +13,8 @@ export default function PullsPage() {
   useEffect(() => {
     getPullsByRepoName(repoName, userName, 1)
       .then(setPulls)
-      .then(() =>
-        getPullsByRepoName(repoName, userName, page + 1).then(pulls =>
-          pulls.length === 0 ? setNext(false) : setNext(true)
-        )
-      )
+      .then(() => getPullsByRepoName(repoName, userName, page + 1))
+      .then(pulls => pulls.length === 0 ? setNext(false) : setNext(true))
       .catch(error => console.error(error))
   }, [repoName, userName, page])
 
